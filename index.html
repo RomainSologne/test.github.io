@@ -8,35 +8,23 @@ roid<html>
   <style>
 #map {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}  
     
-    .Mypopup .mapboxgl-popup-content {
-      background-color: black;
-      color : white;
-      opacity : 0.7;
+.Mypopup .mapboxgl-popup-content {
+	background-color: black;
+	color : white;
+	opacity : 0.7;
 }
-    
-        .menu {
-     position: absolute;
-     top: 10px;
-     left: 30px;
-     width: 180px;
-     background-color: #FFFFFF;
-     opacity: 0.89;
-     color: #000000;
-     font: 13px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-      padding:10;
-        }
-
-	 .logo {
-            position: absolute;
-            bottom: 17px;
-            right: 17px;
-            max-width: 150px;
-            height: auto;
-        }
+      
+.logo {
+	position: absolute;
+	bottom: 17px;
+	right: 17px;
+        max-width: 150px;
+        height: auto;
+}
         
-        .logo-link {
-            text-decoration: none; /* Supprime le soulignement du lien */
-        }
+.logo-link {
+        text-decoration: none; /* Supprime le soulignement du lien */
+}
     
   </style>
 
@@ -51,23 +39,7 @@ roid<html>
             <img src="https://inegalites.fr/local/cache-vignettes/L300xH89/siteon0-b9b71.png?1657618760" alt="Logo de l'entreprise" class="logo">
          </a>
     </div>
-   
-    <div class='menu'>
-    <hr>
-<label class="categoryLabel"><B>Données Réferentielles</B></label>
-          <br>
- <input type="checkbox" id="Batiments" value="Batiments" onchange="switchlayer('Batiments')" checked/>
-<label for="Batiments">Batiments</label>
-          <hr>
-<label class="categoryLabel"><B>Données TC</B></label>
-          <br>
-<input type="checkbox" id="Stations" value="Stations" onchange="switchlayer('Stations')" checked/>
-<label for="Stations">Stations de métro</label>
-          <br>
-<input type="checkbox" id="Lignes" value="Lignes" onchange="switchlayer('Lignes')" checked/>
-<label for="Lignes">Lignes de métro</label>
-  <hr>
-</div>
+
 <script>
    
       //Appel et configuration de la carte
