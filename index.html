@@ -60,7 +60,7 @@ var map = new mapboxgl.Map({
   container: 'map',
   style: 'https://openmaptiles.geo.data.gouv.fr/styles/osm-bright/style.json', //Fond de carte 
   zoom: 15.3, // Zoom
-  center: [-1.68, 48.106],  // Centrage carte
+  center: [2.333333, 48.866667],  // Centrage carte
   pitch: 60, // Inclinaison carte
   bearing: -50,  // Rotation carte
   minZoom:14.5
@@ -73,7 +73,7 @@ map.on('load', function () {
 
 map.addSource('Paris', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/RomainSologne/test.github.io/refs/heads/main/data/Paris.geojson'
+        data: 'https://raw.githubusercontent.com/RomainSologne/test.github.io/main/Paris.geojson'
     });
  
 map.addLayer({
