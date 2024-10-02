@@ -71,20 +71,20 @@ var map = new mapboxgl.Map({
 map.on('load', function () {   
    //BATIMENTS 
 
-map.addSource('Batiments', {
+map.addSource('Paris', {
         type: 'geojson',
-        data: 'https://raw.githubusercontent.com/mastersigat/data/main/BatiRennes.geojson'
+        data: 'https://raw.githubusercontent.com/RomainSologne/test.github.io/refs/heads/main/data/Paris.geojson'
     });
  
 map.addLayer({
-    'id': 'Batiments',
+    'id': 'Paris',
     'type': 'fill-extrusion',
-    'source': 'Batiments',
+    'source': 'Paris',
 	'paint': 
 	{'fill-extrusion-color': '#A9A9A9', 
-        'fill-extrusion-height':{'type': 'identity','property': 'HAUTEUR'},
+        'fill-extrusion-height':{'type': 'identity','property': 'Men'},
         'fill-extrusion-color': {
-        'property': 'HAUTEUR',
+        'property': 'Men_Pauv',
         'stops': [
           [5, '#1a9850'],
           [7, '#91cf60'],
