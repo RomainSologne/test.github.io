@@ -201,7 +201,7 @@ map.on('mousemove', function(e) {
     var feature = features[0];
     const centroid = getCentroid(feature.geometry.coordinates);
     popup.setLngLat(centroid) // Utilisez le centroid calculé
-        .setHTML(<b>Population sous le seuil de pauvreté :</b> + feature.properties.Men_pauv + )
+        .setHTML('<b>'Part de ménages pauvres'</b>' + feature.properties.Men_pauv + )
         .addTo(map);
 });
 	
