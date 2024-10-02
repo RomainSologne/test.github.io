@@ -1,4 +1,4 @@
-<html>
+roid<html>
   
 <head>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
@@ -148,7 +148,8 @@ map.on('mousemove', function(e) {
         return; }
  
     var feature = features[0];
-        popup.setLngLat(feature.geometry.coordinates)
+	const centroid = getCentroid(feature.geometry.coordinates);
+        popup.setLngLat(feature.geometry.centroid)
           .setHTML('<b>'+ feature.properties.Men_pauv + '</b>')
         .addTo(map);
 
