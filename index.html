@@ -11,7 +11,7 @@
     <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
 </head>
 <body>
-    <div id="map" style="width: 100%; height: 600px;"></div>
+    <div id="map" style="width: 100%; height: 100%;"></div>
 
     <script>
         // Initialisation de la carte Leaflet
@@ -24,7 +24,7 @@
 
         // Fonction pour charger les données GeoJSON et les ajouter à la carte
         async function loadGeoJSON() {
-            const response = await fetch('file:///C:/Users/romth/Downloads/Site/data/Paris.geojson');  // Mettez ici le bon chemin
+            const response = await fetch('C:\Users\romth\Downloads\Site\data\Paris.geojson');  // Mettez ici le bon chemin
             const data = await response.json();
 
             // Ajout d'une couche Deck.gl pour l'affichage en 3D
