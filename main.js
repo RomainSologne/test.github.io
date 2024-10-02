@@ -16,7 +16,7 @@ function add3DLayer(data) {
         wireframe: true,
         getFillColor: [255, 140, 0, 160], // Couleur de remplissage
         getLineColor: [255, 255, 255], // Couleur des lignes de contour
-        getElevation: d => d.properties.ind * 10, // Extrusion basée sur la densité de population
+        getElevation: d => d.properties.Ind * 10, // Extrusion basée sur la densité de population
         getRadius: 100,
         pointRadiusMinPixels: 5,
         pointRadiusScale: 2000,
