@@ -9,12 +9,12 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
     <!-- Inclusion de Deck.gl -->
     <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+    <script src="https://unpkg.com/@deck.gl/leaflet@latest/dist.min.js"></script>
 </head>
 <body>
     <div id="map" style="width: 100%; height: 100%;"></div>
 
     <script>
-        // Initialisation de la carte Leaflet
         const map = L.map('map').setView([48.8566, 2.3522], 12);  // Coordonnées de Paris
 
         // Ajout d'une couche de fond (OpenStreetMap)
@@ -22,24 +22,21 @@
             maxZoom: 18
         }).addTo(map);
 
-        // Fonction pour charger les données GeoJSON et les ajouter à la carte
         async function loadGeoJSON() {
-            const response = await fetch('C:\Users\romth\Downloads\Site\data\Paris.geojson');  // Mettez ici le bon chemin
+            const response = await fetch('http://localhost/data/Paris.geojson');  // Remplacez par l'URL correcte
             const data = await response.json();
 
-            // Ajout d'une couche Deck.gl pour l'affichage en 3D
             const deckLayer = new deck.GeoJsonLayer({
                 id: 'Paris',
                 data: data,
-                extruded: true,  // Active l'extrusion pour le rendu 3D
-                getFillColor: [255, 0, 0],  // Couleur rouge pour les objets
-                getElevation: d => 100,  // Hauteur des objets (à ajuster selon vos besoins)
-                pickable: true,  // Active l'interactivité
+                extruded: true,
+                getFillColor: [255, 0, 0],
+                getElevation: d => 100,
+                pickable: true,
                 onClick: info => console.log('Object clicked:', info.object)
             });
 
-            // Ajout de la couche Deck.gl à Leaflet
-            const deckOverlay = new deck.DeckGL({
+            const deckOverlay = new deck.LeafletLayer({
                 layers: [deckLayer],
                 initialViewState: {
                     latitude: 48.8566,
@@ -47,12 +44,10 @@
                     zoom: 12,
                     bearing: 0,
                     pitch: 45
-                },
-                controller: true
+                }
             });
 
-            // Ajout de la couche à la carte
-            L.deckGL(deckOverlay).addTo(map);
+            deckOverlay.addTo(map);
         }
 
         loadGeoJSON();
