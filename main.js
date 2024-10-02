@@ -30,7 +30,7 @@ function add3DLayer(data) {
 }
 
 // Charger le fichier GeoJSON contenant les données INSEE
-fetch('data.geojson')
+fetch('Population_Paris.geojson')
     .then(response => response.json())
     .then(data => add3DLayer(data))
     .catch(error => console.error('Erreur lors du chargement des données:', error));
