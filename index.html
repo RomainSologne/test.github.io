@@ -131,30 +131,43 @@ map.addLayer({
          });
   
   
-  //Interactivité HOVER
+// Fonction pour calculer le centroid d'un polygone
+function getCentroid(coordinates) {
+    const [firstRing] = coordinates; // Prend le premier anneau du polygone
+    let x = 0;
+    let y = 0;
+    for (let i = 0; i < firstRing.length; i++) {
+        x += firstRing[i][0];
+        y += firstRing[i][1];
+    }
+    return [x / firstRing.length, y / firstRing.length]; // Retourne les coordonnées du centroid
+}
 
+// Initialisation du popup
 var popup = new mapboxgl.Popup({
     className: "Mypopup",
-  closeButton: false,
-    closeOnClick: false });
+    closeButton: false,
+    closeOnClick: false 
+});
 
+// Écouteur d'événements pour la souris
 map.on('mousemove', function(e) {
     var features = map.queryRenderedFeatures(e.point, { layers: ['Paris'] });
-    // Change the cursor style as a UI indicator.
+    // Change le style du curseur comme indicateur d'interface utilisateur.
     map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
 
     if (!features.length) {
         popup.remove();
-        return; }
+        return; 
+    }
  
     var feature = features[0];
-	const centroid = getCentroid(feature.geometry.coordinates);
-        popup.setLngLat(feature.geometry.centroid)
-          .setHTML('<b>'+ feature.properties.Men_pauv + '</b>')
+    const centroid = getCentroid(feature.geometry.coordinates);
+    popup.setLngLat(centroid) // Utilisez le centroid calculé
+        .setHTML('<b>' + feature.properties.Men_pauv + '</b>')
         .addTo(map);
-
 });
-
+	
   // Configuration affichage menu couches
  switchlayer = function (lname) {
             if (document.getElementById(lname ).checked) {
