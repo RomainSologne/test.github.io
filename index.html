@@ -24,7 +24,7 @@
 
         // Fonction pour charger les données GeoJSON et les ajouter à la carte
         async function loadGeoJSON() {
-            const response = await fetch('data\Paris.geojson');  // Mettez ici le bon chemin
+            const response = await fetch('file:///C:/Users/romth/Downloads/Site/data/Paris.geojson');  // Mettez ici le bon chemin
             const data = await response.json();
 
             // Ajout d'une couche Deck.gl pour l'affichage en 3D
