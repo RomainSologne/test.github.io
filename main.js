@@ -10,13 +10,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 function add3DLayer(data) {
     const deckLayer = new deck.GeoJsonLayer({
         id: 'geojson-layer',
-        data: Population_Paris, // Les données GeoJSON
+        data: data, // Les données GeoJSON
         extruded: true, // Active l'extrusion 3D
         filled: true,
         wireframe: true,
         getFillColor: [255, 140, 0, 160], // Couleur de remplissage
         getLineColor: [255, 255, 255], // Couleur des lignes de contour
-        getElevation: d => d.properties.Ind * 10, // Extrusion basée sur la densité de population
+        getElevation: d => d.properties.population_density * 10, // Extrusion basée sur la densité de population
         getRadius: 100,
         pointRadiusMinPixels: 5,
         pointRadiusScale: 2000,
@@ -30,7 +30,7 @@ function add3DLayer(data) {
 }
 
 // Charger le fichier GeoJSON contenant les données INSEE
-fetch('Population_Paris.geojson')
+fetch('data.geojson')
     .then(response => response.json())
     .then(data => add3DLayer(data))
     .catch(error => console.error('Erreur lors du chargement des données:', error));
