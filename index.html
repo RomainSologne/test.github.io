@@ -106,7 +106,8 @@ var map = new mapboxgl.Map({
   // Ajout des données
       
 map.on('load', function () {   
-   //BATIMENTS 
+  
+//BATIMENTS 
 
 map.addSource('Paris', {
         type: 'geojson',
@@ -133,21 +134,6 @@ map.addLayer({
 	 'fill-extrusion-opacity': 0.7,
          'fill-extrusion-base': 0}
 });
-
-// Ajout lignes de metros
-  
-map.addSource('lignes', {
-        type: 'geojson',
-        data: 'https://raw.githubusercontent.com/mastersigat/data/main/metro-du-reseau-star-traces-de-laxe-des-lignes.geojson'
-});
-
-map.addLayer({
-        'id': 'Lignes',
-        'type': 'line',
-        'source': 'lignes',
-        'paint': {'line-opacity': 0.7, 'line-width': 7,
-                'line-color': '#0074D9'}
-});   
    
 // Ajout stations de metros
   
