@@ -132,42 +132,8 @@ map.addLayer({
           [70, '#d73027']]},
 	 'fill-extrusion-opacity': 0.7,
          'fill-extrusion-base': 0}
-    });
+});
    
-     // Ajout lignes de metros
-  
-     map.addSource('lignes', {
-            type: 'geojson',
-            data: 'https://raw.githubusercontent.com/mastersigat/data/main/metro-du-reseau-star-traces-de-laxe-des-lignes.geojson'
-        });
-
-     map.addLayer({
-            'id': 'Lignes',
-            'type': 'line',
-            'source': 'lignes',
-            'paint': {'line-opacity': 0.7, 'line-width': 7,
-                     'line-color': '#0074D9'}
-     });   
-   
-     // Ajout stations de metros
-  
-  map.addSource('Stations', {
-            type: 'geojson',
-            data: 'https://raw.githubusercontent.com/mastersigat/data/main/metro-du-reseau-star-localisation-des-stations.geojson'
-        });
-
-     map.addLayer({
-            'id': 'Stations',
-            'type': 'circle',
-            'source': 'Stations',
-            'paint': {'circle-stroke-color': 'white', 
-                      'circle-stroke-width': 3, 
-                      'circle-radius' : 6,
-                      'circle-color': '#0074D9'}}
-                 );  
-         });
-  
-  
 // Fonction pour calculer le centroid d'un polygone
 function getCentroid(coordinates) {
     const [firstRing] = coordinates; // Prend le premier anneau du polygone
