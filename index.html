@@ -66,6 +66,44 @@
 .logo-link {
         text-decoration: none; /* Supprime le soulignement du lien */
 }
+
+/* Le style de la fenêtre modal */
+    .modal {
+      display: none; /* Caché par défaut */
+      position: fixed;
+      z-index: 1000; /* Au-dessus des autres éléments */
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Contenu de la fenêtre */
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      width: 40%; /* Largeur de la fenêtre */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center; /* Centrer le texte */
+    }
+
+    /* Style pour le bouton de fermeture */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover, .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
     
   </style>
 
@@ -85,9 +123,36 @@
       <p class="heading__title" style="color: #3168af; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); font-size: 24px;">La France de la pauvreté en 3D</p>
       <p class="heading__subtitle">(carrés de 200 m de côté)</p>
       <em class="heading__subtitle">Romain Thomas pour l’Observatoire des inégalités. Source :</em>
-      <a class="heading__small" href="https://www.insee.fr/fr/statistiques/7655475?sommaire=7655515" target="_blank">INSEE</a>
-      <p class="heading__tiny">Pour en savoir plus (lien)</p>
+	  <a class="heading__small" href="https://www.insee.fr/fr/statistiques/7655475?sommaire=7655515" target="_blank">INSEE</a>
+	  <br> <!-- Saut de ligne -->
+	  <p class="heading__small"id="popup-link">Pour en savoir plus</p>
     </div>
+	
+ <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span> <!-- Bouton de fermeture -->
+      <h2>Informations supplémentaires</h2>
+      <p>Cette carte de France représente en relief le nombre de pauvres et en couleur la part de ménages
+pauvres. Nous avons utilisé les données de l’Insee 2019 publiées pour des carreaux de 200 m de côté.
+Pour certaines zones très peu peuplées, les données ne sont pas publiées du fait du secret
+statistique.
+<br>
+<br>
+Cette carte affiche à la fois les nombres de ménages et les taux de pauvreté. Le plus souvent, les
+cartes ne portent que sur les taux. Dans ce dernier cas, on affiche des valeurs – les couleurs foncées
+de notre carte – qui ne portent que sur un petit nombre de ménages ce qui donne beaucoup
+d’importance aux zones très peu peuplées.
+<br>
+<br>
+La carte en trois dimensions avec le nombre de ménages permet de visualiser concrètement combien
+de personnes sont pauvres sur un territoire. Elle met en évidence l’importance de la pauvreté dans
+les grandes villes.
+<br>
+<br>
+« Leur diffusion doit donc respecter la règle d’au moins <b>11 ménages par unité géographique
+d’observation. »</b></p>
+    </div>
+  </div>
 
 <script>
    
@@ -102,7 +167,30 @@ var map = new mapboxgl.Map({
   bearing: -50,  // Rotation carte
   minZoom:10
     });
-    
+  
+// Obtenir les éléments
+    var modal = document.getElementById("modal");
+    var popupLink = document.getElementById("popup-link");
+    var closeBtn = document.getElementsByClassName("close")[0];
+
+    // Quand l'utilisateur clique sur "Pour en savoir plus"
+    popupLink.onclick = function() {
+      modal.style.display = "flex"; // Afficher la fenêtre
+    }
+
+    // Quand l'utilisateur clique sur (x) pour fermer
+    closeBtn.onclick = function() {
+      modal.style.display = "none"; // Cacher la fenêtre
+    }
+
+    // Quand l'utilisateur clique en dehors de la fenêtre, fermer la modal
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none"; // Cacher la fenêtre
+      }
+    }
+
+  
   // Ajout des données
       
 map.on('load', function () {   
@@ -122,14 +210,14 @@ map.addLayer({
 	{'fill-extrusion-color': '#A9A9A9', 
         'fill-extrusion-height':{'type': 'identity','property': 'Men'},
         'fill-extrusion-color': {
-        'property': 'Men_pauv',
+        'property': 'Part_pauv',
         'stops': [
           [10, '#1a9850'],
           [20, '#91cf60'],
           [30, '#d9ef8b'],
           [40, '#ffffbf'],
       	  [50, '#fee08b'],
-	  [60, '#fc8d59'],
+	      [60, '#fc8d59'],
           [70, '#d73027']]},
 	 'fill-extrusion-opacity': 0.7,
          'fill-extrusion-base': 0}
@@ -170,7 +258,9 @@ map.on('mousemove', function(e) {
     var feature = features[0];
     const centroid = getCentroid(feature.geometry.coordinates);
     popup.setLngLat(centroid) // Utilisez le centroid calculé
-        .setHTML('<b>Part de ménages pauvres</b>' + feature.properties.Men_pauv )
+        .setHTML(
+			'<b>Part de ménages pauvres : </b>' + feature.properties.Part_pauv + '<b>%</b><br>' +
+			'<b>Nombre de ménages : </b>' + feature.properties.Men)
         .addTo(map);
 });
 	
