@@ -134,26 +134,9 @@ map.addLayer({
 	 'fill-extrusion-opacity': 0.7,
          'fill-extrusion-base': 0}
 });
-   
-// Ajout stations de metros
+	
+);
   
-map.addSource('Stations', {
-        type: 'geojson',
-        data: 'https://raw.githubusercontent.com/mastersigat/data/main/metro-du-reseau-star-localisation-des-stations.geojson'
-});
-
-map.addLayer({
-        'id': 'Stations',
-        'type': 'circle',
-        'source': 'Stations',
-         'paint': {'circle-stroke-color': 'white', 
-                'circle-stroke-width': 3, 
-                'circle-radius' : 6,
-                 'circle-color': '#0074D9'}}
-                );  
-});
-  
-   
 // Fonction pour calculer le centroid d'un polygone
 function getCentroid(coordinates) {
     const [firstRing] = coordinates; // Prend le premier anneau du polygone
